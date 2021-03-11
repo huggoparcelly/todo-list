@@ -3,11 +3,19 @@ const getList = document.querySelector('#lista-tarefas'); // capturar a lista or
 
 // adiciona e muda a classe do background
 function changeClass(event) {
-  const getClassBg = document.querySelectorAll('.backgroundItens'); // capturar todos os elementos com a classe
+  const getClassBg = document.querySelectorAll('li'); // capturar todos os elementos com a classe
   for (let c = 0; c < getClassBg.length; c += 1) { // passar por todos os elementos
     getClassBg[c].classList.remove('backgroundItens'); // remove a classe dos elementos que à contém
   }
   event.target.classList.add('backgroundItens'); // adiciona a classe ao elemento clicado
+}
+
+function taskCompleted(event) {
+  event.target.classList.toggle('completed'); // adiciona a classe ao elemento clicado
+}
+
+function removeCompleted(event) {
+  event.target.classList.remove('completed'); // adiciona a classe ao elemento clicado
 }
 
 function addTask() {
@@ -17,6 +25,7 @@ function addTask() {
   createItem.innerHTML = getText.value; // item recebe o texto do input
   getText.value = ''; // apaga o conteudo do input
   createItem.addEventListener('click', changeClass); // adicionar um evento de clique, que muda o bg, no item criado
+  createItem.addEventListener('dblclick', taskCompleted);
 }
 
 // adicionar um evento click ao botão

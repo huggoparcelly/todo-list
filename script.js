@@ -3,7 +3,7 @@ const getList = document.querySelector('#lista-tarefas'); // capturar a lista or
 
 // adiciona e muda a classe do background
 function changeClass(event) {
-  const getClassBg = document.querySelectorAll('li'); // capturar todos os elementos com a classe
+  const getClassBg = document.getElementsByTagName('li'); // capturar todos os elementos com a classe
   for (let c = 0; c < getClassBg.length; c += 1) { // passar por todos os elementos
     getClassBg[c].classList.remove('backgroundItens'); // remove a classe dos elementos que à contém
   }
@@ -31,7 +31,7 @@ function btnClick() {
 }
 
 function clearAll() {
-  document.getElementById('lista-tarefas').innerHTML = ''; // captura as tarefas
+  getList.innerHTML = ''; // captura as tarefas
 }
 
 function btnClearAll() {
@@ -52,8 +52,36 @@ function btnClearFinish() {
   btnRemoveFinish.addEventListener('click', clearFinish);
 }
 
+// salvar tarefas
+// localStorage.setItem("key", "value");
+function salveData() {
+  const getItens = document.getElementsByTagName('li'); // captura os itens pela tag
+  for (let i = 0; i < getItens.length; i += 1) {
+    localStorage.setItem([i], getItens[i].outerHTML); // retorna os itens dentro da ol
+  }
+}
+
+function btnSalve() {
+  const getBtnSalve = document.getElementById('salvar-tarefas');
+  getBtnSalve.addEventListener('click', salveData);
+}
+
+// ler os dados
+function getData() {
+  const getItens = document.getElementsByTagName('li'); // captura os itens pela tag
+  for (let i = 0; i < localStorage.length; i += 1) {
+    const createItem = document.createElement('li'); // criar o item
+    getList.appendChild(createItem); // adiciona o item a lista
+    getItens[i].outerHTML = localStorage.getItem(i); // captura os itens salvos
+    getItens[i].addEventListener('click', changeClass); // adicionar um evento de clique, que muda o bg, no item criado
+    getItens[i].addEventListener('dblclick', taskCompleted); // adiciona um evento de dblclick, que adiciona e remove o risco na atividade.
+  }
+}
+
 window.onload = function () {
   btnClick();
   btnClearAll();
   btnClearFinish();
+  btnSalve();
+  getData();
 };

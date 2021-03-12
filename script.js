@@ -41,7 +41,7 @@ function btnClearAll() {
 
 // captura o inner.HTML de quem ta finalizado
 function clearFinish() {
-  const taksFinish = document.getElementsByClassName('completed'); // captura o elemento que tem a class completed
+  const taksFinish = document.querySelectorAll('.completed'); // captura o elemento que tem a class completed
   for (let i = 0; i < taksFinish.length; i += 1) {
     taksFinish[i].remove();
   }

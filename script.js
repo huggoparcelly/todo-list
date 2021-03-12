@@ -32,14 +32,28 @@ function btnClick() {
 
 function clearAll() {
   document.getElementById('lista-tarefas').innerHTML = ''; // captura as tarefas
-};
+}
 
 function btnClearAll() {
   const btnClear = document.querySelector('#apaga-tudo'); // captura o botão
   btnClear.addEventListener('click', clearAll);
 }
 
+// captura o inner.HTML de quem ta finalizado
+function clearFinish() {
+  const taksFinish = document.getElementsByClassName('completed'); // captura o elemento que tem a class completed
+  for (let i = 0; i < taksFinish.length; i += 1) {
+    taksFinish[i].remove();
+  }
+}
+// captura o botão e adiciona o evento
+function btnClearFinish() {
+  const btnRemoveFinish = document.getElementById('remover-finalizados');
+  btnRemoveFinish.addEventListener('click', clearFinish);
+}
+
 window.onload = function () {
   btnClick();
   btnClearAll();
+  btnClearFinish();
 };

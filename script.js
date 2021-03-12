@@ -11,11 +11,7 @@ function changeClass(event) {
 }
 
 function taskCompleted(event) {
-  event.target.classList.toggle('completed'); // adiciona a classe ao elemento clicado
-}
-
-function removeCompleted(event) {
-  event.target.classList.remove('completed'); // adiciona a classe ao elemento clicado
+  event.target.classList.toggle('completed'); // adiciona e remove a classe ao elemento clicado
 }
 
 function addTask() {
@@ -25,7 +21,7 @@ function addTask() {
   createItem.innerHTML = getText.value; // item recebe o texto do input
   getText.value = ''; // apaga o conteudo do input
   createItem.addEventListener('click', changeClass); // adicionar um evento de clique, que muda o bg, no item criado
-  createItem.addEventListener('dblclick', taskCompleted);
+  createItem.addEventListener('dblclick', taskCompleted); // adiciona um evento de dblclick, que adiciona e remove o risco na atividade.
 }
 
 // adicionar um evento click ao botão
@@ -34,6 +30,16 @@ function btnClick() {
   getBtn.addEventListener('click', addTask);
 }
 
+function clearAll() {
+  document.getElementById('lista-tarefas').innerHTML = ''; // captura as tarefas
+};
+
+function btnClearAll() {
+  const btnClear = document.querySelector('#apaga-tudo'); // captura o botão
+  btnClear.addEventListener('click', clearAll);
+}
+
 window.onload = function () {
   btnClick();
+  btnClearAll();
 };

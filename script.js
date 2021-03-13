@@ -32,24 +32,12 @@ function btnClick() {
 
 function clearAll() {
   getList.innerHTML = ''; // captura as tarefas
+  localStorage.clear();
 }
 
 function btnClearAll() {
   const btnClear = document.querySelector('#apaga-tudo'); // captura o botão
   btnClear.addEventListener('click', clearAll);
-}
-
-// captura o inner.HTML de quem ta finalizado
-function clearFinish() {
-  const taksFinish = document.querySelectorAll('.completed'); // captura o elemento que tem a class completed
-  for (let i = 0; i < taksFinish.length; i += 1) {
-    taksFinish[i].remove();
-  }
-}
-// captura o botão e adiciona o evento
-function btnClearFinish() {
-  const btnRemoveFinish = document.getElementById('remover-finalizados');
-  btnRemoveFinish.addEventListener('click', clearFinish);
 }
 
 // salvar tarefas
@@ -66,6 +54,40 @@ function btnSalve() {
   getBtnSalve.addEventListener('click', salveData);
 }
 
+function clearFinish() {
+  const taksFinish = document.querySelectorAll('.completed'); // captura o elemento que tem a class completed
+  for (let i = 0; i < taksFinish.length; i += 1) {
+    taksFinish[i].remove(); // remove da lista
+    localStorage.removeItem(i); // remove do localStorage
+  }
+  // atualização do localStorage
+  localStorage.clear();
+  salveData();
+}
+
+// captura o botão e adiciona o evento
+function btnClearFinish() {
+  const btnRemoveFinish = document.getElementById('remover-finalizados');
+  btnRemoveFinish.addEventListener('click', clearFinish);
+}
+
+function clearSelection() {
+  const taksSelection = document.querySelectorAll('.backgroundItens'); // captura o elemento que tem a class backgroundItens
+  for (let i = 0; i < taksSelection.length; i += 1) {
+    taksSelection[i].remove(); // remove da lista
+    localStorage.removeItem(i); // remove do localStorage
+  }
+  // atualização do localStorage
+  localStorage.clear();
+  salveData();
+}
+
+// captura o botão e adiciona o evento
+function btnClearSelection() {
+  const btnRemoveSelection = document.getElementById('remover-selecionado');
+  btnRemoveSelection.addEventListener('click', clearSelection);
+}
+
 // ler os dados
 function getData() {
   const getItens = document.getElementsByTagName('li'); // captura os itens pela tag
@@ -80,8 +102,9 @@ function getData() {
 
 window.onload = function () {
   btnClick();
+  btnSalve();
   btnClearAll();
   btnClearFinish();
-  btnSalve();
+  btnClearSelection();
   getData();
 };

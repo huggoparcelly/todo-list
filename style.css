@@ -1,7 +1,31 @@
+#main {
+  margin: 50px ;
+  text-align: center;
+  padding: 15px;
+  /* background-color: cadetblue; */
+}
+
+#title {
+  font-size: xx-large;
+}
+
 .backgroundItens {
   background-color: grey;
 }
 
 .completed {
   text-decoration: line-through solid black;
+}
+
+#lista-tarefas {
+  line-height: 20px;
+  width: fit-content;
+  margin: auto;
+  padding-right: 40px;
+  /* background-color: cyan; */
+  text-align: justify;
+}
+
+#listContainer {
+  margin: 20px;
 }

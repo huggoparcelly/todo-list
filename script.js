@@ -54,6 +54,12 @@ function btnSalve() {
   getBtnSalve.addEventListener('click', salveData);
 }
 
+function attLocalStorage() {
+  // atualização do localStorage
+  localStorage.clear();
+  salveData();
+}
+
 function clearFinish() {
   const taksFinish = document.querySelectorAll('.completed'); // captura o elemento que tem a class completed
   for (let i = 0; i < taksFinish.length; i += 1) {
@@ -61,8 +67,7 @@ function clearFinish() {
     localStorage.removeItem(i); // remove do localStorage
   }
   // atualização do localStorage
-  localStorage.clear();
-  salveData();
+  attLocalStorage();
 }
 
 // captura o botão e adiciona o evento
@@ -88,6 +93,32 @@ function btnClearSelection() {
   btnRemoveSelection.addEventListener('click', clearSelection);
 }
 
+function moveUp() {
+  const taksSelection = document.querySelector('.backgroundItens'); // Captura o elemento selecionado
+  if (taksSelection !== getList.firstElementChild) {
+    getList.insertBefore(taksSelection, taksSelection.previousElementSibling); // move para o próximo elemento
+  }
+}
+
+function btnMoveUp() {
+  const btnUp = document.getElementById('mover-cima');
+  btnUp.addEventListener('click', moveUp);
+}
+
+// CONSERTAR O MOVE DOWN.
+
+function moveDown() {
+  const taksSelection = document.querySelector('.backgroundItens'); // Captura o elemento selecionado
+  if (taksSelection !== getList.lastElementChild) {
+    getList.insertBefore(taksSelection.nextElementSibling, taksSelection); // move para o próximo elemento
+  }
+}
+
+function btnMoveDown() {
+  const btnDown = document.getElementById('mover-baixo');
+  btnDown.addEventListener('click', moveDown);
+}
+
 // ler os dados
 function getData() {
   const getItens = document.getElementsByTagName('li'); // captura os itens pela tag
@@ -106,5 +137,7 @@ window.onload = function () {
   btnClearAll();
   btnClearFinish();
   btnClearSelection();
+  btnMoveUp();
+  btnMoveDown();
   getData();
 };

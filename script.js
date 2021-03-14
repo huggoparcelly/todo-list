@@ -94,9 +94,11 @@ function btnClearSelection() {
 }
 
 function moveUp() {
-  const taksSelection = document.querySelector('.backgroundItens'); // Captura o elemento selecionado
-  if (taksSelection !== getList.firstElementChild) {
-    getList.insertBefore(taksSelection, taksSelection.previousElementSibling); // move para o próximo elemento
+  const taksSelection = document.querySelectorAll('.backgroundItens'); // Captura o elemento selecionado
+  for (let i = 0; i < taksSelection.length; i += 1) {
+    if (taksSelection[i] !== getList.firstElementChild) {
+      getList.insertBefore(taksSelection[i], taksSelection[i].previousElementSibling); // move para o próximo elemento
+    }
   }
 }
 
@@ -108,9 +110,11 @@ function btnMoveUp() {
 // CONSERTAR O MOVE DOWN.
 
 function moveDown() {
-  const taksSelection = document.querySelector('.backgroundItens'); // Captura o elemento selecionado
-  if (taksSelection !== getList.lastElementChild) {
-    getList.insertBefore(taksSelection.nextElementSibling, taksSelection); // move para o próximo elemento
+  const taksSelection = document.querySelectorAll('.backgroundItens'); // Captura o elemento selecionado
+  for (let i = 0; i < taksSelection.length; i += 1) {
+    if (taksSelection[i] !== getList.lastElementChild) {
+      getList.insertBefore(taksSelection[i].nextElementSibling, taksSelection[i]); // move para o próximo elemento
+    }
   }
 }
 
